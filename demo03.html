@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加和减</title>
+</head>
+<body>
+	<div id="app">
+	<button v-on:click="sub">-</button>
+	<label v-text="counter"></label>
+	<button v-on:click="add">+</button>
+	
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+	let app = new Vue ({
+		el: "#app",
+		data: {
+			counter: 0,
+		},
+		methods: {
+			add: function() {
+				if (this.counter >= 30) {
+					alter('不能大于30');
+				} else {
+					this.counter++
+				}
+			},
+			sub: function() {
+				if (this.counter <= 0) {
+	          		alter('不能小于0');
+	        } else {
+	          		this.counter -= 1
+				}
+			}
+		}
+	})
+	</script>
+</body>
+</html>
