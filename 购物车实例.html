@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>购物车实例</title>
+</head>
+<style>table tr td{text-align: center;}input{width: 30px;text-align: center;}</style>
+<body>
+<h1 align="center">购物车</h1>
+<div id="app">
+
+<table align="center" width="600" border="1" cellpadding="0" cellspacing="0" >
+<tr>
+<th>序号</th>
+<th>型号</th>
+<th>单价</th>
+<th>数量</th>
+<th>小计</th>
+</tr>
+
+<tr v-for="(item,index) in list">
+<td>{{Number(index)+1}}</td>
+<td>{{item.name}}</td>
+<td class="money">{{item.price}}</td>
+
+<td>
+<button v-on:click="jian(index)">-</button>
+<input type="text" v-model="item.num" v-on:input="change(index)">
+<button v-on:click="add(index)">+</button>
+</td>
+
+<td class="money">{{item.price*item.num}}</td>
+</tr>
+</table>
+
+<table align="center" width="200" border="1" cellpadding="5" cellspacing="0" style="margin-top: 50px;">
+<tr>
+<th>总数量</th>
+<th>总金额</th>
+</tr>
+<tr>
+<td>{{ count2() }}</td>
+<td class="money">{{ allMoney() }}</td>
+
+</tr>
+</table>
+</div>
+<!-- 引入vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+const app = new Vue ({
+	el: '#app',
+	data: {
+	list: [
+	{id: '0',name:'macbook',price:'6888',num:1},
+	{id: '1',name:'ipad',price:'2688',num:1}
+	]},
+methods:{
+	// 增加
+	add: function(index){
+	if(this.list[index].num<100){
+	this.list[index].num++;
+		}
+	},
+
+	// 减少
+	jian: function(index){
+	if(this.list[index].num>1){
+	this.list[index].num--;
+		}
+	},
+
+	// 总数量
+	count2: function(){
+	var List=this.list;
+	var total=0;
+	for(var i=0;i<List.length;i++){
+	total+=parseInt(List[i].num);
+		}
+	return total;
+	},
+
+	// 总金额
+	allMoney: function(){
+	var List=this.list;
+	var totalMoney=0;
+	for(var i=0;i<List.length;i++){
+	totalMoney+=parseInt(List[i].num)*List[i].price;
+		}
+	return totalMoney;
+
+			}
+		}
+	});
+</script>
+</body>
+</html>
